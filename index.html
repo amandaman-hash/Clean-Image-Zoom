@@ -81,3 +81,74 @@
     .hero{grid-template-columns:1fr;gap:32px;padding-top:24px}
     h1{font-size:2.4rem}
     .cards{grid-template-columns:1fr 1fr}
+    header,.hero,.wrap,footer{padding-left:20px;padding-right:20px}
+  }
+  @media (max-width:520px){ .cards{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+<div class="bar"></div>
+
+<header>
+  <div class="logo">Clean Images</div>
+  <a class="gh" href="https://github.com/amandaman-hash/No-links-texts-clean-image-zoom" target="_blank" rel="noopener noreferrer">GitHub</a>
+</header>
+
+<main>
+  <section class="hero">
+    <div>
+      <h1>Image search,<br><b>without the clutter.</b></h1>
+      <p class="lead">Remove captions, prices and icons from image results. Click any image to see the full-resolution original, then scroll to zoom.</p>
+      <ol class="steps">
+        <li><span><b>Install:</b> drag the round button to your bookmarks bar.</span></li>
+        <li><span><b>Search:</b> open an image search and wait for the results.</span></li>
+        <li><span><b>Click the bookmark once</b> per page load. Captions vanish.</span></li>
+        <li><span><b>Click an image</b> to open it. Scroll to zoom, drag to pan, Esc to close.</span></li>
+      </ol>
+    </div>
+
+    <div class="panel">
+      <a id="bm" class="go" href="#">Images</a>
+      <strong>Drag me to your bookmarks bar</strong>
+      <p class="sub">Show the bar with Ctrl+Shift+B (Cmd+Shift+B on Mac).<br>Clicking won't work here. It has to be dragged.</p>
+      <details>
+        <summary>Dragging doesn't work?</summary>
+        <p>Create a bookmark by hand and paste this into its URL field. It must start with <code>javascript:</code> and have nothing before or after it.</p>
+        <textarea id="code" readonly onclick="this.select()"></textarea>
+      </details>
+    </div>
+  </section>
+</main>
+
+<section class="band">
+  <div class="wrap">
+    <p class="label">What you get</p>
+    <div class="cards">
+      <div class="card"><i style="background:var(--blue)"></i><h3>Clean grid</h3><p>Only images. No text, prices or icons.</p></div>
+      <div class="card"><i style="background:var(--red)"></i><h3>Full resolution</h3><p>Opens the original, not the blurry preview.</p></div>
+      <div class="card"><i style="background:var(--yellow)"></i><h3>Scroll to zoom</h3><p>0.5x to 10x, centered on your cursor.</p></div>
+      <div class="card"><i style="background:var(--green)"></i><h3>Fast</h3><p>Starts loading when you pause on an image.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Free and open source. Best-effort: it may stop working if the search site changes its pages. Desktop only. Not affiliated with any search engine company.
+</footer>
+
+<script>
+fetch('bookmarklet.min.js').then(r => r.text()).then(t => {
+  t = t.trim();
+  document.getElementById('bm').href = t;
+  document.getElementById('code').value = t;
+}).catch(() => {
+  document.getElementById('code').value = 'Could not load the code. Please refresh the page.';
+});
+document.getElementById('bm').addEventListener('click', e => {
+  if (e.currentTarget.getAttribute('href') === '#') return;
+  e.preventDefault();
+  alert('Drag this button to your bookmarks bar instead of clicking it.');
+});
+</script>
+</body>
+</html>
