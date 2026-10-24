@@ -5,7 +5,8 @@ A bookmarklet for image search pages. It does two things:
 
 1. **Cleans the grid.** Hides the captions, prices, store names and corner icons under each result, so you see only the images.
 2. **Zooms in full resolution.** Clicking an image opens the original (not the blurry preview) centered on a dark background. Scroll to zoom, drag to pan.
-
+3. Wait for a few seconds if image doesn't so the image can be updated to the same quality as sites. Blame your internet not me.
+   
 ## Install
 
 **Easy way:** open the install page and drag the button to your bookmarks bar.
