@@ -14,110 +14,70 @@
     --text:#202124; --muted:#5f6368; --line:#dadce0; --soft:#f8f9fa;
   }
   *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{margin:0;background:#fff;color:var(--text);
-       font:16px/1.6 "Google Sans",Roboto,system-ui,-apple-system,"Segoe UI",sans-serif}
+  html,body{height:100%}
+  body{margin:0;background:#fff;color:var(--text);display:flex;flex-direction:column;min-height:100vh;
+       font:16px/1.55 "Google Sans",Roboto,system-ui,-apple-system,"Segoe UI",sans-serif}
   a{color:var(--blue);text-decoration:none}
   a:hover{text-decoration:underline}
-  code{background:var(--soft);padding:2px 6px;border-radius:4px;font-size:.9em}
+  code{background:#fff;padding:2px 6px;border-radius:4px;font-size:.9em;border:1px solid var(--line)}
 
-  .bar{height:5px;background:linear-gradient(90deg,var(--blue) 0 25%,var(--red) 25% 50%,var(--yellow) 50% 75%,var(--green) 75% 100%)}
-  header{display:flex;align-items:center;justify-content:space-between;
-         max-width:1200px;margin:0 auto;padding:18px 32px}
+  .bar{height:5px;flex:none;background:linear-gradient(90deg,var(--blue) 0 25%,var(--red) 25% 50%,var(--yellow) 50% 75%,var(--green) 75% 100%)}
+  header{flex:none;display:flex;align-items:center;justify-content:space-between;
+         width:100%;max-width:1200px;margin:0 auto;padding:14px 32px}
   .logo{font-size:1.25rem;font-weight:500;color:var(--text)}
-  .logo span:nth-child(1){color:var(--blue)}
-  .logo span:nth-child(2){color:var(--red)}
-  .logo span:nth-child(3){color:var(--yellow)}
-  .logo span:nth-child(4){color:var(--green)}
-  nav a{margin-left:24px;color:var(--muted);font-size:.95rem}
+  .gh{color:var(--muted);font-size:.95rem}
 
-  .hero{max-width:1200px;margin:0 auto;padding:56px 32px 72px;
+  main{flex:1;display:flex;flex-direction:column;justify-content:center}
+  .hero{width:100%;max-width:1200px;margin:0 auto;padding:24px 32px 32px;
         display:grid;grid-template-columns:1.15fr 1fr;gap:64px;align-items:center}
-  h1{font-size:3.4rem;line-height:1.1;font-weight:400;margin:0 0 20px;letter-spacing:-.5px}
+  h1{font-size:3rem;line-height:1.1;font-weight:400;margin:0 0 16px;letter-spacing:-.5px}
   h1 b{font-weight:500;color:var(--blue)}
-  .lead{font-size:1.25rem;color:var(--muted);margin:0 0 32px;max-width:520px}
+  .lead{font-size:1.15rem;color:var(--muted);margin:0 0 22px;max-width:520px}
   .steps{list-style:none;margin:0;padding:0;counter-reset:s}
-  .steps li{counter-increment:s;display:flex;gap:16px;align-items:flex-start;margin-bottom:16px;color:var(--text)}
-  .steps li::before{content:counter(s);flex:none;width:30px;height:30px;border-radius:50%;
+  .steps li{counter-increment:s;display:flex;gap:14px;align-items:flex-start;margin-bottom:11px}
+  .steps li::before{content:counter(s);flex:none;width:28px;height:28px;border-radius:50%;
        background:var(--soft);border:1px solid var(--line);color:var(--blue);
-       font-weight:500;text-align:center;line-height:28px}
+       font-weight:500;text-align:center;line-height:26px;font-size:.9rem}
 
   .panel{background:var(--soft);border:1px solid var(--line);border-radius:28px;
-         padding:48px 32px;text-align:center}
+         padding:36px 28px 28px;text-align:center}
   .go{display:inline-flex;align-items:center;justify-content:center;
-      width:200px;height:200px;border-radius:50%;background:var(--blue);color:#fff;
-      font-size:1.9rem;font-weight:500;cursor:grab;text-decoration:none;
-      box-shadow:0 0 0 14px rgba(26,115,232,.12),0 0 0 32px rgba(26,115,232,.06),0 10px 30px rgba(26,115,232,.35);
+      width:170px;height:170px;border-radius:50%;background:var(--blue);color:#fff;
+      font-size:1.7rem;font-weight:500;cursor:grab;text-decoration:none;
+      box-shadow:0 0 0 12px rgba(26,115,232,.12),0 0 0 26px rgba(26,115,232,.06),0 10px 30px rgba(26,115,232,.35);
       transition:transform .15s}
   .go:hover{transform:scale(1.04);text-decoration:none}
-  .panel p{margin:36px 0 0;color:var(--muted)}
-  .panel strong{display:block;color:var(--text);font-size:1.1rem;font-weight:500;margin-top:28px}
+  .panel strong{display:block;color:var(--text);font-size:1.05rem;font-weight:500;margin-top:30px}
+  .panel .sub{margin:6px 0 0;color:var(--muted);font-size:.92rem}
+  details{margin-top:14px;text-align:left}
+  summary{cursor:pointer;color:var(--blue);font-size:.92rem;text-align:center;list-style:none}
+  summary::-webkit-details-marker{display:none}
+  details p{margin:10px 0 8px;color:var(--muted);font-size:.85rem}
+  textarea{width:100%;height:80px;border:1px solid var(--line);border-radius:10px;
+           padding:10px;font:11px monospace;color:var(--text);background:#fff;resize:vertical}
 
-  .band{background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-  .wrap{max-width:1200px;margin:0 auto;padding:64px 32px}
-  h2{font-size:1.9rem;font-weight:400;margin:0 0 28px}
-  .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-  .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px}
-  .card i{display:block;width:40px;height:6px;border-radius:3px;margin-bottom:16px}
-  .card h3{margin:0 0 6px;font-size:1.1rem;font-weight:500}
-  .card p{margin:0;color:var(--muted);font-size:.95rem}
+  .band{flex:none;background:var(--soft);border-top:1px solid var(--line)}
+  .wrap{width:100%;max-width:1200px;margin:0 auto;padding:18px 32px 20px}
+  .label{margin:0 0 12px;font-size:1.05rem;font-weight:500}
+  .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 18px}
+  .card i{display:block;width:32px;height:5px;border-radius:3px;margin-bottom:10px}
+  .card h3{margin:0 0 2px;font-size:1rem;font-weight:500}
+  .card p{margin:0;color:var(--muted);font-size:.9rem;line-height:1.4}
 
-  .two{display:grid;grid-template-columns:1fr 1fr;gap:48px}
-  table{width:100%;border-collapse:collapse}
-  td{padding:14px 0;border-bottom:1px solid var(--line)}
-  td:first-child{font-weight:500;width:45%}
-  td:last-child{color:var(--muted)}
-  textarea{width:100%;height:150px;border:1px solid var(--line);border-radius:12px;
-           padding:12px;font:12px monospace;color:var(--text);background:#fff;resize:vertical}
-  .note{color:var(--muted);font-size:.95rem}
+  footer{flex:none;width:100%;max-width:1200px;margin:0 auto;padding:12px 32px 16px;color:var(--muted);font-size:.82rem}
 
-  footer{max-width:1200px;margin:0 auto;padding:32px;color:var(--muted);font-size:.9rem;
-         display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
-
-  @media (max-width:900px){
-    .hero{grid-template-columns:1fr;gap:40px;padding-top:32px}
-    h1{font-size:2.5rem}
-    .cards{grid-template-columns:1fr 1fr}
-    .two{grid-template-columns:1fr}
-    header{padding:16px 20px}
-    .hero,.wrap,footer{padding-left:20px;padding-right:20px}
+  @media (max-height:820px){
+    h1{font-size:2.5rem;margin-bottom:12px}
+    .lead{margin-bottom:16px;font-size:1.05rem}
+    .steps li{margin-bottom:8px}
+    .hero{padding-top:12px;padding-bottom:20px}
+    .go{width:140px;height:140px;font-size:1.5rem}
+    .panel{padding:28px 24px 20px}
+    .panel strong{margin-top:24px}
   }
-  @media (max-width:520px){ .cards{grid-template-columns:1fr} nav a{margin-left:14px} }
-</style>
-</head>
-<body>
-<div class="bar"></div>
-
-<header>
-  <div class="logo"><span>C</span><span>l</span><span>e</span><span>a</span>n Images</div>
-  <nav>
-    <a href="#features">Features</a>
-    <a href="#help">Help</a>
-    <a href="https://github.com/amandaman-hash/No-links-texts-clean-image-zoom" target="_blank" rel="noopener noreferrer">GitHub</a>
-  </nav>
-</header>
-
-<section class="hero">
-  <div>
-    <h1>Image search,<br><b>without the clutter.</b></h1>
-    <p class="lead">Remove captions, prices and icons from image results. Click any image to see the full-resolution original, then scroll to zoom.</p>
-    <ol class="steps">
-      <li><span><b>Install:</b> drag the round button to your bookmarks bar.</span></li>
-      <li><span><b>Search:</b> open an image search and wait for the results.</span></li>
-      <li><span><b>Click the bookmark once</b> per page load. Captions vanish.</span></li>
-      <li><span><b>Click an image</b> to open it. Scroll to zoom, drag to pan.</span></li>
-    </ol>
-  </div>
-
-  <div class="panel">
-    <a id="bm" class="go" href="#">Images</a>
-    <strong>Drag me to your bookmarks bar</strong>
-    <p>Show the bar with Ctrl+Shift+B (Cmd+Shift+B on Mac).<br>Click won't work here. It has to be dragged.</p>
-  </div>
-</section>
-
-<section class="band" id="features">
-  <div class="wrap">
-    <h2>What you get</h2>
-    <div class="cards">
-      <div class="card"><i style="background:var(--blue)"></i><h3>Clean grid</h3><p>Only images. No text, prices, store names or icons.</p></div>
+  @media (max-width:900px){
+    html,body{height:auto}
+    .hero{grid-template-columns:1fr;gap:32px;padding-top:24px}
+    h1{font-size:2.4rem}
+    .cards{grid-template-columns:1fr 1fr}
