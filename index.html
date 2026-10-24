@@ -3,119 +3,121 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Clean Image Zoom: cleaner image search results with full-resolution zoom</title>
+<title>Clean Images: image search without the clutter</title>
 <meta name="description" content="Free bookmarklet that removes captions, prices and icons from image search grids and opens full-resolution images with scroll-wheel zoom and drag to pan.">
-<meta property="og:title" content="Clean Image Zoom">
-<meta property="og:description" content="Remove captions, prices and icons from image search results. Zoom into full-resolution images with your scroll wheel.">
+<meta property="og:title" content="Clean Images">
+<meta property="og:description" content="Image search results with no captions, prices or icons. Click any image for full resolution, then scroll to zoom.">
 <meta property="og:type" content="website">
 <style>
-  :root{--bg:#0f1115;--card:#171a21;--text:#e8eaf0;--muted:#9aa3b2;--accent:#4c8dff;--border:#262b36}
-  @media (prefers-color-scheme: light){
-    :root{--bg:#f6f7fb;--card:#ffffff;--text:#1b1f2a;--muted:#5b6475;--accent:#1a5cff;--border:#e3e6ee}
+  :root{
+    --blue:#1a73e8; --red:#ea4335; --yellow:#fbbc04; --green:#34a853;
+    --text:#202124; --muted:#5f6368; --line:#dadce0; --soft:#f8f9fa;
   }
   *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-  .wrap{max-width:760px;margin:0 auto;padding:48px 20px 64px}
-  h1{font-size:2.4rem;line-height:1.15;margin:0 0 12px}
-  h2{font-size:1.25rem;margin:0 0 12px}
-  p{margin:0 0 14px}
-  .lead{font-size:1.15rem;color:var(--muted);margin-bottom:28px}
-  .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:20px}
-  .btn{display:inline-block;padding:14px 26px;background:var(--accent);color:#fff;border-radius:10px;
-       text-decoration:none;font-weight:700;font-size:1.05rem;cursor:grab;box-shadow:0 6px 20px rgba(76,141,255,.35)}
-  .steps{counter-reset:s;list-style:none;padding:0;margin:0}
-  .steps li{counter-increment:s;position:relative;padding-left:44px;margin-bottom:18px}
-  .steps li::before{content:counter(s);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;
-       background:var(--accent);color:#fff;font-weight:700;text-align:center;line-height:30px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
-  .grid div{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:14px}
-  .grid b{display:block;margin-bottom:4px}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:#fff;color:var(--text);
+       font:16px/1.6 "Google Sans",Roboto,system-ui,-apple-system,"Segoe UI",sans-serif}
+  a{color:var(--blue);text-decoration:none}
+  a:hover{text-decoration:underline}
+  code{background:var(--soft);padding:2px 6px;border-radius:4px;font-size:.9em}
+
+  .bar{height:5px;background:linear-gradient(90deg,var(--blue) 0 25%,var(--red) 25% 50%,var(--yellow) 50% 75%,var(--green) 75% 100%)}
+  header{display:flex;align-items:center;justify-content:space-between;
+         max-width:1200px;margin:0 auto;padding:18px 32px}
+  .logo{font-size:1.25rem;font-weight:500;color:var(--text)}
+  .logo span:nth-child(1){color:var(--blue)}
+  .logo span:nth-child(2){color:var(--red)}
+  .logo span:nth-child(3){color:var(--yellow)}
+  .logo span:nth-child(4){color:var(--green)}
+  nav a{margin-left:24px;color:var(--muted);font-size:.95rem}
+
+  .hero{max-width:1200px;margin:0 auto;padding:56px 32px 72px;
+        display:grid;grid-template-columns:1.15fr 1fr;gap:64px;align-items:center}
+  h1{font-size:3.4rem;line-height:1.1;font-weight:400;margin:0 0 20px;letter-spacing:-.5px}
+  h1 b{font-weight:500;color:var(--blue)}
+  .lead{font-size:1.25rem;color:var(--muted);margin:0 0 32px;max-width:520px}
+  .steps{list-style:none;margin:0;padding:0;counter-reset:s}
+  .steps li{counter-increment:s;display:flex;gap:16px;align-items:flex-start;margin-bottom:16px;color:var(--text)}
+  .steps li::before{content:counter(s);flex:none;width:30px;height:30px;border-radius:50%;
+       background:var(--soft);border:1px solid var(--line);color:var(--blue);
+       font-weight:500;text-align:center;line-height:28px}
+
+  .panel{background:var(--soft);border:1px solid var(--line);border-radius:28px;
+         padding:48px 32px;text-align:center}
+  .go{display:inline-flex;align-items:center;justify-content:center;
+      width:200px;height:200px;border-radius:50%;background:var(--blue);color:#fff;
+      font-size:1.9rem;font-weight:500;cursor:grab;text-decoration:none;
+      box-shadow:0 0 0 14px rgba(26,115,232,.12),0 0 0 32px rgba(26,115,232,.06),0 10px 30px rgba(26,115,232,.35);
+      transition:transform .15s}
+  .go:hover{transform:scale(1.04);text-decoration:none}
+  .panel p{margin:36px 0 0;color:var(--muted)}
+  .panel strong{display:block;color:var(--text);font-size:1.1rem;font-weight:500;margin-top:28px}
+
+  .band{background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .wrap{max-width:1200px;margin:0 auto;padding:64px 32px}
+  h2{font-size:1.9rem;font-weight:400;margin:0 0 28px}
+  .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px}
+  .card i{display:block;width:40px;height:6px;border-radius:3px;margin-bottom:16px}
+  .card h3{margin:0 0 6px;font-size:1.1rem;font-weight:500}
+  .card p{margin:0;color:var(--muted);font-size:.95rem}
+
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:48px}
   table{width:100%;border-collapse:collapse}
-  td{padding:8px 4px;border-bottom:1px solid var(--border)}
-  td:first-child{font-weight:600;width:40%}
-  textarea{width:100%;height:110px;background:var(--bg);color:var(--text);border:1px solid var(--border);
-       border-radius:8px;padding:10px;font:12px monospace}
-  .muted{color:var(--muted);font-size:.92rem}
-  a{color:var(--accent)}
-  footer{text-align:center;color:var(--muted);font-size:.9rem;margin-top:32px}
+  td{padding:14px 0;border-bottom:1px solid var(--line)}
+  td:first-child{font-weight:500;width:45%}
+  td:last-child{color:var(--muted)}
+  textarea{width:100%;height:150px;border:1px solid var(--line);border-radius:12px;
+           padding:12px;font:12px monospace;color:var(--text);background:#fff;resize:vertical}
+  .note{color:var(--muted);font-size:.95rem}
+
+  footer{max-width:1200px;margin:0 auto;padding:32px;color:var(--muted);font-size:.9rem;
+         display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+
+  @media (max-width:900px){
+    .hero{grid-template-columns:1fr;gap:40px;padding-top:32px}
+    h1{font-size:2.5rem}
+    .cards{grid-template-columns:1fr 1fr}
+    .two{grid-template-columns:1fr}
+    header{padding:16px 20px}
+    .hero,.wrap,footer{padding-left:20px;padding-right:20px}
+  }
+  @media (max-width:520px){ .cards{grid-template-columns:1fr} nav a{margin-left:14px} }
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="bar"></div>
 
-  <h1>Clean Image Zoom</h1>
-  <p class="lead">Image search results with no captions, prices or icons. Click any image to see it in full resolution, then scroll to zoom.</p>
+<header>
+  <div class="logo"><span>C</span><span>l</span><span>e</span><span>a</span>n Images</div>
+  <nav>
+    <a href="#features">Features</a>
+    <a href="#help">Help</a>
+    <a href="https://github.com/amandaman-hash/No-links-texts-clean-image-zoom" target="_blank" rel="noopener noreferrer">GitHub</a>
+  </nav>
+</header>
 
-  <div class="card" style="text-align:center">
-    <p class="muted" style="margin-bottom:16px">Drag this button to your bookmarks bar</p>
-    <a id="bm" class="btn" href="#">Image Zoom</a>
-    <p class="muted" style="margin:16px 0 0">Show the bar with Ctrl+Shift+B (Cmd+Shift+B on Mac)</p>
-  </div>
-
-  <!-- Add a before/after screenshot here once you have one:
-  <div class="card"><img src="before-after.png" alt="Image search grid before and after" style="max-width:100%;border-radius:10px"></div> -->
-
-  <div class="card">
-    <h2>How to use it</h2>
+<section class="hero">
+  <div>
+    <h1>Image search,<br><b>without the clutter.</b></h1>
+    <p class="lead">Remove captions, prices and icons from image results. Click any image to see the full-resolution original, then scroll to zoom.</p>
     <ol class="steps">
-      <li><b>Install.</b> Drag the button above to your bookmarks bar.</li>
-      <li><b>Search.</b> Open an image search and wait for results to load.</li>
-      <li><b>Click the bookmark once.</b> The captions disappear. Click it again after any reload or new search.</li>
-      <li><b>Click an image.</b> It opens large on a dark background. Scroll to zoom, drag to pan.</li>
+      <li><span><b>Install:</b> drag the round button to your bookmarks bar.</span></li>
+      <li><span><b>Search:</b> open an image search and wait for the results.</span></li>
+      <li><span><b>Click the bookmark once</b> per page load. Captions vanish.</span></li>
+      <li><span><b>Click an image</b> to open it. Scroll to zoom, drag to pan.</span></li>
     </ol>
   </div>
 
-  <div class="card">
+  <div class="panel">
+    <a id="bm" class="go" href="#">Images</a>
+    <strong>Drag me to your bookmarks bar</strong>
+    <p>Show the bar with Ctrl+Shift+B (Cmd+Shift+B on Mac).<br>Click won't work here. It has to be dragged.</p>
+  </div>
+</section>
+
+<section class="band" id="features">
+  <div class="wrap">
     <h2>What you get</h2>
-    <div class="grid">
-      <div><b>Clean grid</b>Only images, no text, prices or icons.</div>
-      <div><b>Full resolution</b>Loads the original, not the blurry preview.</div>
-      <div><b>Scroll to zoom</b>0.5x to 10x, centered on your cursor.</div>
-      <div><b>Fast</b>Starts downloading when you pause on an image.</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>Controls</h2>
-    <table>
-      <tr><td>Open image</td><td>Click it</td></tr>
-      <tr><td>Zoom in / out</td><td>Scroll up / down</td></tr>
-      <tr><td>Pan</td><td>Click and drag</td></tr>
-      <tr><td>Close</td><td>Click the dark area, or press Esc</td></tr>
-    </table>
-  </div>
-
-  <div class="card">
-    <h2>Dragging doesn't work?</h2>
-    <p class="muted">Create a bookmark by hand, then paste this into its URL field. It must start with <code>javascript:</code> and have nothing before or after it.</p>
-    <textarea id="code" readonly onclick="this.select()"></textarea>
-  </div>
-
-  <div class="card">
-    <h2>Good to know</h2>
-    <p class="muted">This is best-effort software. It depends on how the search site builds its pages, so it may stop working when that changes. Pausing on images downloads their full-size originals, which uses more data. Some results, such as shopping tiles, only show the preview. Desktop browsers only.</p>
-  </div>
-
-  <footer>
-    Free and open source ·
-    <a href="https://github.com/amandaman-hash/No-links-texts-clean-image-zoom" target="_blank" rel="noopener noreferrer">View on GitHub</a><br>
-    Not affiliated with any search engine company.
-  </footer>
-</div>
-
-<script>
-fetch('bookmarklet.min.js').then(r => r.text()).then(t => {
-  t = t.trim();
-  document.getElementById('bm').href = t;
-  document.getElementById('code').value = t;
-}).catch(() => {
-  document.getElementById('code').value = 'Could not load the code. Please refresh the page.';
-});
-document.getElementById('bm').addEventListener('click', e => {
-  if (e.currentTarget.getAttribute('href') === '#') return;
-  e.preventDefault();
-  alert('Drag this button to your bookmarks bar instead of clicking it.');
-});
-</script>
-</body>
-</html>
+    <div class="cards">
+      <div class="card"><i style="background:var(--blue)"></i><h3>Clean grid</h3><p>Only images. No text, prices, store names or icons.</p></div>
