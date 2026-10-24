@@ -17,7 +17,7 @@ https://github.com/amandaman-hash/No-links-texts-clean-image-zoom/
 **Manual way** (if dragging doesn't work):
 
 1. Create a new bookmark in your browser (right-click the bookmarks bar, then Add page).
-2. Name it `Image Zoom`.
+2. Name it `No Text Image Zoom`.
 3. Paste the code below into the **URL** field. It must start with `javascript:` and have nothing before or after it.
 
 ```
