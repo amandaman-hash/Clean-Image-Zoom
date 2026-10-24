@@ -84,6 +84,3 @@ Pull requests are welcome, especially fixes for when the page structure changes.
 
 This project is not affiliated with, endorsed by, or sponsored by any search engine company. Product and company names are trademarks of their respective owners. You are responsible for respecting the terms of the sites you use it on and the copyright of images you view.
 
-## License
-
-MIT. See [LICENSE](LICENSE).
