@@ -1,4 +1,4 @@
-# No links texts clean image zoom
+# No links texts under images in Chrome 
 # Clean Image Zoom
 
 A bookmarklet for image search pages. It does two things:
