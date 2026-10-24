@@ -10,7 +10,7 @@ A bookmarklet for image search pages. It does two things:
 
 **Easy way:** open the install page and drag the button to your bookmarks bar.
 
-https://YOUR-USERNAME.github.io/clean-image-zoom/
+https://github.com/amandaman-hash/No-links-texts-clean-image-zoom/
 
 (Show the bookmarks bar first with Ctrl+Shift+B on Windows/Linux or Cmd+Shift+B on Mac.)
 
