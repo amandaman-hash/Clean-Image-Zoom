@@ -12,7 +12,7 @@ A bookmarklet for image search pages. It does two things:
 
 **Easy way:** open the install page and drag the button to your bookmarks bar.
 
-https://amandaman-hash.github.io/No-links-texts-clean-image-zoom/
+   <a href="https://amandaman-hash.github.io/No-links-texts-clean-image-zoom/" target="_blank" rel="noopener noreferrer">Install</a>
 
 (Show the bookmarks bar first with Ctrl+Shift+B on Windows/Linux or Cmd+Shift+B on Mac.)
 
